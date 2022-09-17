@@ -1,7 +1,7 @@
 name: "infra preview & deploy"
 
 on:
-  pull_request:
+  push:
     branches:
       - main
     paths:
