@@ -1,0 +1,30 @@
+name: infra preview & deploy
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - /10_infra/
+  workflow_dispatch:
+
+env:
+  TF_VERSION: 1.2.8
+
+defaults:
+  run:
+    shell: bash
+    working-directory: "/10_infra/"
+
+jobs:
+  preview:
+    name: Preview
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cehckout repository
+        uses: actions/checkout@v3
+      - name: Setup terraform
+        uses: hashicorp/setup-terraform
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+          terraform_wrapper: false
