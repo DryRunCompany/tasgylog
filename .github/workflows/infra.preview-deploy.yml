@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - feature/**
     paths:
       - /10_infra/
   workflow_dispatch:
