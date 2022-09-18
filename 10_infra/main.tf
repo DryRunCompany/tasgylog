@@ -10,8 +10,8 @@ terraform {
     }
   }
   backend "s3" {
-    bucket  = "tastylog-tfstate-bucket"
-    key     = "tastylog-test.tfstate"
+    bucket  = "tastylog-dryrun-tfstate-bucket"
+    key     = "tastylog-dryrun.tfstate"
     region  = "ap-northeast-1"
     profile = "terraform"
   }
@@ -23,8 +23,6 @@ terraform {
 provider "aws" {
   profile = "terraform"
   region  = "ap-northeast-1"
-  # access_key = "AKIAIOSFODNN7EXAMPLE"
-  # secret_key = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
 }
 
 provider "aws" {
