@@ -62,4 +62,4 @@ jobs:
             -detailed-exitcode
       - name: Output results
         run: |
-          echo "terraform plan exitcode : ${{ steps.plan.exitcode }}""
+          echo "terraform plan exitcode : ${{ steps.plan.outputs.exitcode }}""
