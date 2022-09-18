@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - /10_infra/
-      - /.github/workflows/
+      - 10_infra/**
+      - .github/workflows/**
   workflow_dispatch:
 
 permissions:
