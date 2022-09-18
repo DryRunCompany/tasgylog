@@ -61,5 +61,6 @@ jobs:
             -no-color \
             -detailed-exitcode
       - name: Output results
+        if: always()
         run: |
           echo "terraform plan exitcode : ${{ steps.plan.outputs.exitcode }}"
