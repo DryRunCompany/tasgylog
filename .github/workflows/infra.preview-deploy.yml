@@ -35,4 +35,4 @@ jobs:
           terraform_wrapper: false
       - name: Terraform format
         run: |
-          terraform fmt
+          terraform fmt -check
