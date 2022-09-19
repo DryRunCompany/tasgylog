@@ -60,3 +60,10 @@ jobs:
             -input=false \
             -no-color \
             -detailed-exitcode
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    if: success()
+    steps:
+      - run: |
+          echo "Hello World"
