@@ -65,7 +65,8 @@ jobs:
   approval-notify:
     name: Approval Notify
     runs-on: ubuntu-latest
-    if: always()
+    needs: preview
+    if: needs.preview.outputs.tf_plan_exitcode == 2
     steps:
       - name: Slack Notify
         uses: slackapi/slack-github-action@v1.22.0
