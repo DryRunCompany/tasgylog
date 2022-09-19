@@ -28,6 +28,7 @@ jobs:
   preview:
     name: Preview
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - name: Cehckout repository
         uses: actions/checkout@v3
@@ -60,3 +61,5 @@ jobs:
             -input=false \
             -no-color \
             -detailed-exitcode
+      - name: message
+        run: echo "hello world"            
