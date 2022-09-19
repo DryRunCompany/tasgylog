@@ -75,3 +75,6 @@ jobs:
     steps:
       - run: |
           echo "Hello World"
+      - name: My first step
+        if: github.event_name == 'pull_request'
+        run: echo "This is pull request"
