@@ -19,15 +19,17 @@ env:
   TF_PROJECT: tastylog
   TF_ENVIRONMENT: dryrun
 
-defaults:
-  run:
-    shell: bash
-    working-directory: "10_infra/"
 
 jobs:
   preview:
     name: Preview
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: "10_infra/"
+    outputs:
+      tf_plan_exitcode: ${{ steps.plan.outputs.exitcode }}
     steps:
       - name: Cehckout repository
         uses: actions/checkout@v3
@@ -60,3 +62,38 @@ jobs:
             -input=false \
             -no-color \
             -detailed-exitcode
+  approval-notify:
+    name: Approval Notify
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Slack Notify
+        uses: slackapi/slack-github-action@v1.22.0
+        with:
+          channel-id: "C03T88UUD35"
+          payload: |
+            {
+              "attachments": [
+                {
+                  "blocks": [
+                    {
+                      "type": "header",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "Request for approve",
+                        "emoji": true
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "${{ env.GITHUB_SERVER_URL }}/${{ env.GITHUB_REPOSITORY }}/actions/runs/${{ env.GITHUB_RUN_ID }}"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
