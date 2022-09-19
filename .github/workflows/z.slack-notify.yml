@@ -16,6 +16,7 @@ jobs:
             {
               "attachments": [
                 {
+                  "color": "goog",
                   "blocks": [
                     {
                       "type": "header",
