@@ -60,6 +60,9 @@ jobs:
             -input=false \
             -no-color \
             -detailed-exitcode
+      - name: always
+        if: always()
+        run: echo "HELLO WORLD !!!!!!!!"
   test:
     name: test
     runs-on: ubuntu-latest
