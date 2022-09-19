@@ -19,19 +19,15 @@ env:
   TF_PROJECT: tastylog
   TF_ENVIRONMENT: dryrun
 
-# defaults:
-#   run:
-#     shell: bash
-#     working-directory: "10_infra/"
+defaults:
+  run:
+    shell: bash
+    working-directory: "10_infra/"
 
 jobs:
   preview:
     name: Preview
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-        working-directory: "10_infra/"
     steps:
       - name: Cehckout repository
         uses: actions/checkout@v3
@@ -64,17 +60,3 @@ jobs:
             -input=false \
             -no-color \
             -detailed-exitcode
-      - name: always
-        if: always()
-        run: echo "HELLO WORLD !!!!!!!!"
-  test:
-    name: test
-    runs-on: ubuntu-latest
-    needs: [preview]
-    if: failure()
-    steps:
-      - run: |
-          echo "Hello World"
-      - name: My first step
-        if: github.event_name == 'pull_request'
-        run: echo "This is pull request"
