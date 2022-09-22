@@ -70,7 +70,6 @@ jobs:
           channel-id: "C03T88UUD35"
           payload: |
             {
-              "text": "${{ env.WORKFLOW_RUN_URL }}",
               "attachments": [
                 {
                   "blocks": [
@@ -86,7 +85,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "${{ env.WORKFLOW_RUN_URL }}"
+                        "text": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
                       }
                     }
                   ]
@@ -95,4 +94,3 @@ jobs:
             }
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-          WORKFLOW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
