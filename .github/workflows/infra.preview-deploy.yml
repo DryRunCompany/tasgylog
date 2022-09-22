@@ -63,8 +63,13 @@ jobs:
             -input=false \
             -no-color \
             -detailed-exitcode
+  approval-notify:
+    name: Approval Notify
+    runs-on: ubuntu-latest
+    needs: preview
+    if: always() && needs.preview.outputs.TF_PLAN_EXITCODE == 2
+    steps:
       - name: Slack Notify
-        if: steps.plan.outputs.exitcode == 2
         uses: slackapi/slack-github-action@v1.22.0
         with:
           channel-id: "C03T88UUD35"
