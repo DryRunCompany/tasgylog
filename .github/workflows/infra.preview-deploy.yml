@@ -135,7 +135,6 @@ jobs:
           channel-id: "${{ secrets.SLACK_CHANNEL_ID }}"
           payload: |
             {
-              "color": "${{ ( success() && '#4aa548') || '#f2c744' }}",
               "attachments": [
                 {
                   "blocks": [
@@ -143,7 +142,7 @@ jobs:
                       "type": "header",
                       "text": {
                         "type": "plain_text",
-                        "text": "Request for approve",
+                        "text": "Runner Finished: ${{ steps.apply.outcome }}",
                         "emoji": true
                       }
                     },
