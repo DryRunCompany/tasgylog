@@ -52,6 +52,7 @@ jobs:
         run: |
           terraform validate -no-color
       - name: Terraform plan
+        conti
         id: plan
         run: |
           terraform plan \
@@ -62,19 +63,8 @@ jobs:
             -input=false \
             -no-color \
             -detailed-exitcode
-      - run: |
-          echo "terraform plan: ${{ steps.plan.outputs.exitcode }}"
-  approval-notify:
-    name: Approval Notify
-    runs-on: ubuntu-latest
-    needs: preview
-    # if: needs.preview.outputs.TF_PLAN_EXITCODE == 2
-    if: always() && needs.preview.outputs.TF_PLAN_EXITCODE == 2
-    steps:
-      - name: sample
-        run: |
-          echo "terraform plan: ${{ needs.preview.outputs.TF_PLAN_EXITCODE }}"
       - name: Slack Notify
+        if: steps.plan.outputs.exitcode == 2
         uses: slackapi/slack-github-action@v1.22.0
         with:
           channel-id: "C03T88UUD35"
