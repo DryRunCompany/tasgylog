@@ -29,7 +29,7 @@ jobs:
         shell: bash
         working-directory: "10_infra/"
     outputs:
-      tf_plan_exitcode: ${{ steps.plan.outputs.exitcode }}
+      TF_PLAN_EXITCODE: ${{ steps.plan.outputs.exitcode }}
     steps:
       - name: Cehckout repository
         uses: actions/checkout@v3
@@ -68,12 +68,12 @@ jobs:
     name: Approval Notify
     runs-on: ubuntu-latest
     needs: preview
-    # if: needs.preview.outputs.tf_plan_exitcode == 2
+    if: needs.preview.outputs.TF_PLAN_EXITCODE == 2
     if: always()
     steps:
       - name: sample
         run: |
-          echo "terraform plan: ${{ needs.preview.outputs.tf_plan_exitcode }}"
+          echo "terraform plan: ${{ needs.preview.outputs.TF_PLAN_EXITCODE }}"
       - name: Slack Notify
         uses: slackapi/slack-github-action@v1.22.0
         with:
