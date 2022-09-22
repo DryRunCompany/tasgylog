@@ -96,8 +96,9 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
   deploy:
     name: Deploy
+    needs: preview
     environment: production
-    rens-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Cehckout repository
         uses: actions/checkout@v3
