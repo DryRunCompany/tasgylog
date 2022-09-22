@@ -19,15 +19,15 @@ env:
   TF_PROJECT: tastylog
   TF_ENVIRONMENT: dryrun
 
+defaults:
+  run:
+    shell: bash
+    working-directory: "10_infra/"
 
 jobs:
   preview:
     name: Preview
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-        working-directory: "10_infra/"
     outputs:
       TF_PLAN_EXITCODE: ${{ steps.plan.outputs.exitcode }}
     steps:
