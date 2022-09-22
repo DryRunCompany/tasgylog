@@ -67,7 +67,7 @@ jobs:
         if: steps.plan.outputs.exitcode == 2
         uses: slackapi/slack-github-action@v1.22.0
         with:
-          channel-id: "C03T88UUD35"
+          channel-id: "${{ secrets.SLACK_CHANNEL_ID }}"
           payload: |
             {
               "attachments": [
@@ -94,4 +94,4 @@ jobs:
             }
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-          WORKFLOW_RUN_URL: 
+  
