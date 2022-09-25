@@ -160,3 +160,39 @@ jobs:
             }
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+  notify:
+    name: Notify
+    needs: [preview, deploy]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Slack Notify
+        uses: slackapi/slack-github-action@v1.22.0
+        with:
+          channel-id: "${{ secrets.SLACK_CHANNEL_ID }}"
+          payload: |
+            {
+              "attachments": [
+                {
+                  "blocks": [
+                    {
+                      "type": "header",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "Runner Finished: ${{ github.action_status }}",
+                        "emoji": true
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
