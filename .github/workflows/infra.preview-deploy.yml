@@ -166,6 +166,8 @@ jobs:
     if: always()
     runs-on: ubuntu-latest
     steps:
+      - name: Get conclusion
+        uses: technote-space/workflow-conclusion-action@v3
       - name: Slack Notify
         uses: slackapi/slack-github-action@v1.22.0
         with:
@@ -179,7 +181,7 @@ jobs:
                       "type": "header",
                       "text": {
                         "type": "plain_text",
-                        "text": "Runner Finished: ${{ github.action_status }}",
+                        "text": "Runner Finished: ${{ env.WORKFLOW_CONCLUSION }}",
                         "emoji": true
                       }
                     },
